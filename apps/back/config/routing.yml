@@ -1,0 +1,41 @@
+user:
+    resource: "@AdminUserBundle/Controller/"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+members:
+    resource: "@AdminMembersBundle/Controller/"
+    type:     annotation
+    prefix:   /members
+
+dashboard:
+    resource: "@AdminDashBoardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+settings:
+    resource: "@AdminSettingsBundle/Controller/"
+    type:     annotation
+    prefix:   /settings
+
+news:
+    resource: "@AdminNewsBundle/Controller/"
+    type:     annotation
+    prefix:   /news
+
+wallets:
+    resource: "@AdminWalletBundle/Controller/"
+    type:     annotation
+    prefix:   /wallets
+
+support:
+    resource: "@AdminSupportBundle/Controller/"
+    type:     annotation
+    prefix:   /support
+
+faq:
+    resource: "@AdminFaqBundle/Controller/"
+    type:     annotation
+    prefix:   /faq

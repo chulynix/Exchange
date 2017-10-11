@@ -1,0 +1,62 @@
+{% extends ":office:base.html.twig"  %}
+
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+
+    <div class="p-profile">
+        <div class="p-inside-transactions-header">{{ 'office.layout.support'|trans }}</div>
+
+        <div class="p-support-start">
+            <span id="newTxAndNews">
+                <div class="p-main-topbuttons">
+                    <div class="p-main-topbuttons-tabs" style="width: 100%">
+                        <ul>
+                            <li id="buy" class="active tabs" style="width: 50%">
+                                <span>
+                                    <a href="javascript: void(0)">{{ 'office.support.all_tikets'|trans }}</a>
+                                </span>
+                            </li>
+                            <li id="sell" class="tabs" style="width: 50%">
+                                <span>
+                                    <a href="{{ path('new_ticket') }}">{{ 'office.support.new_tiket'|trans }}</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cb"></div><br>
+                </div>
+            </span>
+
+            <div style="width: 100%; margin: 0 auto">
+                <div class="activity">
+                    {% for ticket in tickets %}
+                        <div style="">
+                            <span class="icon16 icomoon-icon-envelop gray"></span>
+                            <a href="{{ path('show_ticket', {'id': ticket.id}) }}">
+                                <strong style="font-size: 16px">{{ ticket.subject }}</strong>
+                            </a>
+                                <span style="float: right">
+                                    {% if ticket.status == 0 %}
+                                        <a href="#" class="btn btn-success btn-xs">{{ 'support.opened'|trans }}</a>
+                                    {% elseif ticket.status == 1 %}
+                                        <a href="#" class="btn btn-primary btn-xs">{{ 'support.answered'|trans }}</a>
+                                    {% elseif ticket.status == 2 %}
+                                        <a href="#" class="btn btn-danger btn-xs">{{ 'support.closed'|trans }}</a>
+                                    {% endif %}
+                                </span>
+                            <small style="float: right; margin-right: 30px; margin-top: 5px">
+                                {{ ticket.date|date('d-m-Y') }}
+                            </small>
+                        </div>
+                        <hr style="margin-top: 5px; margin-bottom: 5px">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

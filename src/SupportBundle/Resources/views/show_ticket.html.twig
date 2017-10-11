@@ -1,0 +1,85 @@
+{% extends ":office:base.html.twig"  %}
+
+{#{% form_theme form ':office:twig_theme.html.twig' %}#}
+
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+
+    <div class="p-profile">
+        <div class="p-inside-transactions-header">{{ 'office.layout.support'|trans }}</div>
+
+        <div style="font-size: 14px; font-weight: bold; color: #2e2e2e; margin-left: 30px; margin-top: 10px">
+            {{ ticket.subject }}
+        </div>
+
+        <div class="p-support-start" style="margin-top: 20px">
+            <div style="width: 100%; margin: 0 auto">
+                <div class="messages" style="color: dimgrey">
+                    <div class="user clearfix">
+                        <a class="avatar" href="#" style="float: left">
+                            <img alt="" src="{{ asset('images/user.png') }}" width="40">
+                        </a>
+                        <div class="message">
+                            <div class="head clearfix">
+                                <span class="name"><strong>{{ app.user.username }}</strong> says:</span>
+                                <span class="time">{{ ticket.date|date('d-m-Y h:i') }}</span>
+                                <p style="margin-top: 10px">
+                                    {{ ticket.text|raw }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for answer in answers %}
+                        <div class="{% if answer.role %}admin{% else %}user{% endif %} clearfix" style="margin-top: 20px; overflow: auto">
+                            <a class="avatar" href="#" style="float: {% if answer.role %}right{% else %}left{% endif %}">
+                                {% if answer.role %}
+                                    <img alt="" src="{{ asset('images/admin.png') }}" width="40">
+                                {% else %}
+                                    <img alt="" src="{{ asset('images/user.png') }}" width="40">
+                                {% endif %}
+                            </a>
+                            <div class="message" style="float: {% if answer.role %}right{% else %}left{% endif %}">
+                                <div class="head clearfix">
+                                    <span class="name"><strong>{% if answer.role %}Support{% else %}{{ app.user.username }}{% endif %}</strong> says:</span>
+                                    <span class="time">{{ answer.date|date('d-m-Y h:i') }}</span>
+                                    <p style="margin-top: 10px">
+                                        {{ answer.text|raw }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div style="padding: 10px; width: 100%; margin: 0 auto;">
+                    {{ form_start(form, {'attr':{'class': 'form-horizontal'}}) }}
+                    <div class="p-profile">
+                        <div class="p-new">
+                            <dl>
+                                <dd>
+                                    {{ form_widget(form.text, {'attr': {'rows': '1', 'placeholder': 'Enter your message ...', 'style': 'width: 600px; height: 50px'}}) }}
+                                    <div class="form-error">
+                                        {% if form_errors(form.text) %}{{ form_errors(form.text) }}{% endif %}
+                                    </div>
+                                </dd>
+                            </dl>
+                            {{ form_rest(form) }}
+                            <ul class="p-inside-transactions-buttons" style="padding-right: 65px">
+                                <li class="next button green">
+                                    <input value="{{ 'office.support.send'|trans }}" type="submit" style="width: 100px">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

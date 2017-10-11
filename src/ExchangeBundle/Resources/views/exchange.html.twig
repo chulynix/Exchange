@@ -1,0 +1,121 @@
+{% extends ':office:base.html.twig' %}
+
+{% form_theme buy_form 'ExchangeBundle::theme_buy.html.twig' %}
+{% form_theme sell_form 'ExchangeBundle::theme_sell.html.twig' %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        <span id="newTxAndNews">
+            <div class="p-main-topbuttons">
+                <div class="p-main-topbuttons-tabs" style="width: 100%">
+                    {#{{ dump(form) }}#}
+                    <ul>
+                        <li id="buy" class="{% if form %}active{% endif %} tabs" style="width: 50%">
+                            <span>
+                                <a href="javascript: void(0)">{{ 'office.exchange.buy'|trans }}</a>
+                            </span>
+                        </li>
+                        <li id="sell" class="{% if not form %}active{% endif %} tabs" style="width: 50%">
+                            <span>
+                                <a href="javascript: void(0)">{{ 'office.exchange.sell'|trans }}</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cb"></div><br>
+            </div>
+        </span>
+
+        <div class="p-main-buy tab" {% if not form %}style="display: none"{% endif %}>
+            <div style="width: 350px; margin: 0 auto">
+            {{ form_start(buy_form) }}
+                <div class="p-profile">
+                    <div class="p-new">
+                        <dl>
+                            <dt>
+                                {{ form_label(buy_form.currency) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(buy_form.currency) }}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                {{ form_label(buy_form.sum) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(buy_form.sum, {'attr': {'style': 'width: 273px'}}) }}
+                                <div class="form-error">
+                                    {% if form_errors(buy_form.sum) %}{{ form_errors(buy_form.sum) }}{% endif %}
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    {{ form_rest(buy_form) }}
+                    <ul class="p-inside-transactions-buttons" style="padding-right: 35px">
+                        <li class="next button green">
+                            <input value="{{ 'office.exchange.buy'|trans }}" type="submit" style="width: 100px">
+                        </li>
+                    </ul>
+                </div>
+            {{ form_end(buy_form) }}
+            </div>
+        </div>
+
+        <div class="p-main-sell tab" {% if form %}style="display: none"{% endif %}>
+            <div style="width: 350px; margin: 0 auto">
+                {{ form_start(sell_form) }}
+                <div class="p-profile">
+                    <div class="p-new">
+                        <dl>
+                            <dt>
+                                {{ form_label(sell_form.currency) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(sell_form.currency) }}
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                {{ form_label(sell_form.sum) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(sell_form.sum, {'attr': {'style': 'width: 273px'}}) }}
+                                <div class="form-error">
+                                    {% if form_errors(sell_form.sum) %}{{ form_errors(sell_form.sum) }}{% endif %}
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    {{ form_rest(sell_form) }}
+                    <ul class="p-inside-transactions-buttons" style="padding-right: 35px">
+                        <li class="next button green">
+                            <input value="{{ 'office.exchange.sell'|trans }}" type="submit" style="width: 100px">
+                        </li>
+                    </ul>
+                </div>
+                {{ form_end(buy_form) }}
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript">
+        $('.tabs').click(function() {
+            $('.tabs').removeClass('active');
+            $(this).addClass('active');
+
+            $('.p-main-buy').css('display', 'none');
+            $('.p-main-sell').css('display', 'none');
+
+            $('.p-main-'+$(this).attr('id')).css('display', 'block');
+        });
+    </script>
+{% endblock js %}

@@ -1,0 +1,116 @@
+home:
+  login:
+    forgot_password: Forgot password?
+    authentication_code: Authentication Code
+    cancel: Cancel
+  register:
+    name: Name
+    surname: Surname
+    username: Username
+  about:
+    about: About
+    about_us: About Us
+  privacy:
+    privacy: Privacy Policy
+  terms_and_conditions: Terms and Conditions
+  terms_of_service: Terms of Service
+  contacts:
+    contacts: Contacts
+    name: Name
+    message: Message
+    mesage_sent_succces: Message sent successfully
+    send: Send
+
+support:
+  new_ticket: New ticket
+  all_tickets: All tickets
+  subject: Subject
+  text: Text
+  sent: Send
+  ticket_sent_success: Ticket submitted successfully!
+  ticket_sent_error: Ticket failed!
+  said: Replied
+  mesage_sent_succces: Message sent successfully!
+  opened: Opened
+  answered: Answered
+  closed: Closed
+  status: Status
+
+office:
+  layout:
+    dashboard: Dashboard
+    buy_sell: Buy/Sell
+    personal_account: Personal account
+    wallets: Wallets
+    dollar: US Dollar
+    bitcoin: BitCoin
+    settings: Settings
+    accounts: Accounts
+    no_verification: Not verified
+    wait_verification: Processing
+    done_verification: Verified
+    support: Support
+    help: Help
+
+  dashboard:
+    charts: Charts
+    latest_transactions: Latest transactions
+    news: News
+
+  exchange:
+    buy: Buy
+    sell: Sell
+    not_funds: Insufficient funds!
+    buy_success: Buy success!
+    sell_success: Sell success!
+    limit_error: You have exceeded the amount limit for unverified members!
+
+  settings:
+    save: Save
+    profile: Profile
+    change_password: Change password
+
+  accounts:
+    currency: Currency
+    balance: Balance
+    action: Action
+    deposit: Deposit
+    withdraw: Withdraw
+    sum: Amount
+    send: Send
+    withdraw_success: Withdraw success!
+    account: Account
+    no_funds: Insufficient funds!
+    i_paid: I paid
+    wait_confirm: Waiting confirmation
+    deposit_success: Deposit success!
+    bank_province_state: Bank Province / State
+    bank_zip_postal_code: Bank ZIP / Postal Code
+    bank_aba_routing_code: Bank ABA/Routing Code
+    paypal: PayPal
+    wire: Wire
+
+  verification:
+    verification: Verification
+    passport_photo: Identity Verification
+    services_photo: Address Verification
+    document_photo: Identity Verification
+    skype: Identity Verification
+    verificution_send_success: Send success!
+    verificution_send_error: You need to submit both documents!
+    verificated_waiting: Waiting verification...
+    verification_done: Verification success!
+    choose_file: Choose File
+
+  support:
+    support: Support
+    all_tikets: All tickets
+    new_tiket: New ticket
+    ticket: Ticket
+    send: Send
+    ticket_sent_success: Ticket submitted successfully!
+    ticket_sent_error: Ticket failed!
+    mesage_sent_succces: Message sent successfully!
+
+  deposit:
+    add_funds: Add funds

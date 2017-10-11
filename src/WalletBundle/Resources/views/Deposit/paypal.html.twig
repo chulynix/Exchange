@@ -1,0 +1,108 @@
+{% extends ":office:base.html.twig" %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <span id="deposit-funds-header">
+            <div class="p-inside-transactions-header">{{ 'office.accounts.deposit'|trans }} USD</div>
+        </span>
+
+        <span id="newTxAndNews">
+            <div class="p-main-topbuttons">
+                <div class="p-main-topbuttons-tabs" style="width: 100%">
+                    {#{{ dump(form) }}#}
+                    <ul>
+                        <li id="paypal" class="active tabs" style="width: 50%">
+                            <span>
+                                <a href="javascript: void(0)">{{ 'office.accounts.paypal'|trans }}</a>
+                            </span>
+                        </li>
+                        <li id="wire" class="tabs" style="width: 50%">
+                            <span>
+                                <a href="javascript: void(0)">{{ 'office.accounts.wire'|trans }}</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cb"></div><br>
+            </div>
+        </span>
+
+        <div class="p-main-paypal tab">
+            <div style="width: 350px; margin: 0 auto">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                                <br>
+                                <div style="width: 350px; margin: 0 auto">
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                        {#<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">#}
+                                        <div class="p-profile">
+                                            <div class="p-new">
+                                                <input type="hidden" name="cmd" value="_xclick">
+                                                <input type="hidden" name="business" value="{{ store }}">
+                                                <input type="hidden" name="item_name" value="Add Funds">
+                                                {#<input type="hidden" name="item_number" value="{{ time }}">#}
+                                                <dl>
+                                                    <dt>
+                                                        <label>{{ 'office.accounts.sum'|trans }}</label>
+                                                    </dt>
+                                                    <dd>
+                                                        <input type="text" name="amount" value="0.00" required style="width: 273px">
+                                                    </dd>
+                                                </dl>
+
+                                                <input type="hidden" name="email" value="{{ app.user.email }}">
+                                                <input type="hidden" name="custom" value="{{ app.user.email }}">
+
+                                                <input type="hidden" name="return" value="{{ app.request.getSchemeAndHttpHost() }}/wallets/accounts" />
+                                                <input type="hidden" name="cancel_return" value="{{ app.request.getSchemeAndHttpHost() }}/wallets/accounts" />
+                                                <input type="hidden" name="notify_url" value="{{ app.request.getSchemeAndHttpHost() }}/wallets/paypal/callback" />
+                                            </div>
+                                            {#<input type="image" name="submit"#}
+                                            {#src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"#}
+                                            {#alt="PayPal - The safer, easier way to pay online">#}
+                                            <ul class="p-inside-transactions-buttons" style="padding-right: 35px">
+                                                <li class="next button green">
+                                                    <input value="{{ 'office.deposit.add_funds'|trans }}" type="submit" style="width: 100px">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-main-wire tab" style="display: none">
+            <div style="width: 335px; margin: 0 auto">
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript">
+        $('.tabs').click(function() {
+            $('.tabs').removeClass('active');
+            $(this).addClass('active');
+
+            $('.p-main-paypal').css('display', 'none');
+            $('.p-main-wire').css('display', 'none');
+
+            $('.p-main-'+$(this).attr('id')).css('display', 'block');
+        });
+    </script>
+{% endblock js %}

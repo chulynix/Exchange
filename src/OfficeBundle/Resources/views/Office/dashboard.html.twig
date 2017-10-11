@@ -1,0 +1,281 @@
+{% extends ':office:base.html.twig' %}
+
+{% block styles %}
+    <script src="{{ asset('lib/amchart/amcharts.js') }}"></script>
+    <script src="{{ asset('lib/amchart/serial.js') }}"></script>
+    <script src="{{ asset('lib/amchart/amstock.js') }}"></script>
+    <script src="{{ asset('lib/amchart/export.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('lib/amchart/export.css') }}" type="text/css" media="all" />
+    <script src="{{ asset('lib/amchart/light.js') }}"></script>
+
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+{% endblock styles %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        <span id="newTxAndNews">
+            <div class="p-main-topbuttons">
+                <div class="p-main-topbuttons-tabs" style="width: 100%">
+                    <ul>
+                        <li id="charts" class="active tabs" style="width: 33%">
+                            <span>
+                                <a href="javascript: void(0)" id="j_idt378">{{ 'office.dashboard.charts'|trans }}</a>
+                            </span>
+                        </li>
+                        <li id="transactions" class="tabs" style="width: 33%">
+                            <span>
+                                <a href="javascript: void(0)" id="j_idt378">{{ 'office.dashboard.latest_transactions'|trans }}</a>
+                            </span>
+                        </li>
+                        <li id="news" class="tabs" style="width: 34%">
+                            <span>
+                                <a href="javascript: void(0)" id="newsLink">{{ 'office.dashboard.news'|trans }}</a>
+                            </span>
+                            <div id="unreadNews"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cb"></div><br>
+                <div id="cards-tab" style="display: none;">
+                </div>
+            </div>
+        </span>
+
+        <div class="p-main-charts tab">
+            <span id="chart">
+                <div>
+                    <input id="btc-button" value="BTC" class="amChartsButtonSelected" style="" type="button">
+                </div>
+                <div id="chartdiv"></div>
+            </span>
+        </div>
+
+        <div class="p-main-transactions tab">
+            {#<span>#}
+                {#<table>#}
+                    {#<tbody>#}
+                    {#<tr>#}
+                        {#<th class="date">Дата</th>#}
+                        {#<th class="type">Тип операции</th>#}
+                        {#<th class="corr">Корреспондент</th>#}
+                        {#<th class="sum">Сумма</th>#}
+                        {#<th class="status">Статус</th>#}
+                    {#</tr>#}
+                    {#<tr>#}
+                        {#<td class="date">25 Sep, 19:41</td>#}
+                        {#<td class="type">#}
+                            {#<div>#}
+                                {#<a href="#">#}
+                                    {#Внутренняя транзакция#}
+                                {#</a>#}
+                                {#<span class="api-sci">SCI</span>#}
+                            {#</div>#}
+                        {#</td>#}
+                        {#<td class="corr">U 0546 7181 5837</td>#}
+                        {#<td class="sum">#}
+                            {#<b class="red"> -0.10#}
+                            {#</b>USD</td>#}
+                        {#<td class="status">#}
+
+                            {#<a class="titled" data-title="Выполнена">#}
+                                {#<img src="{{ asset('lib/office/images/status-ok.png') }}">#}
+                            {#</a>#}
+                        {#</td>#}
+                    {#</tr>#}
+                    {#</tbody>#}
+                {#</table>#}
+            {#</span>#}
+
+            <span>
+                {{ render(controller('OfficeBundle:DashBoard:transaction')) }}
+            </span>
+        </div>
+
+        <div class="p-main-news tab">
+            <span id="news">
+                {% for news in all_news %}
+                    <div class="p-main-news-item ">
+                        <div class="p-main-news-date">
+                            {{ news.date|date('d F Y') }}
+                        </div>
+                        <div class="p-main-news-title">{{ news.title }}</div>
+
+                        <div class="p-main-news-text">
+                            {{ news.text|raw }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </span>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            getRateHistory('BTC');
+        });
+    </script>
+    <script type="text/javascript">
+        $('.tabs').click(function() {
+            $('.tabs').removeClass('active');
+            $(this).addClass('active');
+
+            $('.p-main-charts').css('display', 'none');
+            $('.p-main-transactions').css('display', 'none');
+            $('.p-main-news').css('display', 'none');
+
+            $('.p-main-'+$(this).attr('id')).css('display', 'block');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $('#btc-button').click(function (){
+            $(this).removeClass('amChartsButton');
+            $(this).addClass('amChartsButtonSelected');
+
+            getRateHistory('BTC');
+        });
+            $(this).removeClass('amChartsButton');
+            $(this).addClass('amChartsButtonSelected');
+
+            $('#btc-button').removeClass('amChartsButtonSelected');
+            $('#btc-button').addClass('amChartsButton');
+        });
+        function getRateHistory(currency)
+        {
+            var url = "{{ path('get_rate_statistic') }}";
+            $.ajax({
+                url         : url + '/'+currency,
+                dataType    : "json",
+                success     : function(dataStat, status, object) {
+                    if(dataStat.error) {
+                        console.log(dataStat.error);
+                    } else {
+                        console.log(dataStat);
+
+                        var chart = AmCharts.makeChart( "chartdiv", {
+                            "type": "stock",
+                            "theme": "light",
+                            "categoryAxesSettings": {
+                                "minPeriod": "mm"
+                            },
+
+                            "dataSets": [ {
+                                "color": "#13c600",
+                                "fieldMappings": [ {
+                                    "fromField": "value",
+                                    "toField": "value"
+                                }, {
+                                    "fromField": "volume",
+                                    "toField": "volume"
+                                } ],
+
+                                "dataProvider": dataStat,
+                                "categoryField": "date"
+                            } ],
+
+                            "panels": [ {
+                                "showCategoryAxis": false,
+                                "title": "Value",
+                                "percentHeight": 70,
+
+                                "stockGraphs": [ {
+                                    "id": "g1",
+                                    "valueField": "value",
+                                    "type": "smoothedLine",
+                                    "lineThickness": 2,
+                                    "bullet": "round"
+                                } ],
+
+
+                                "stockLegend": {
+                                    "valueTextRegular": " ",
+                                    "markerType": "none"
+                                }
+                            }, {
+                                "title": "Volume",
+                                "percentHeight": 30,
+                                "stockGraphs": [ {
+                                    "valueField": "volume",
+                                    "type": "column",
+                                    "cornerRadiusTop": 2,
+                                    "fillAlphas": 1
+                                } ],
+
+                                "stockLegend": {
+                                    "valueTextRegular": " ",
+                                    "markerType": "none"
+                                }
+                            } ],
+
+                            "chartScrollbarSettings": {
+                                "enabled": false,
+                                "graph": "g1",
+                                "usePeriod": "10mm",
+                                "position": "top"
+                            },
+
+                            "chartCursorSettings": {
+                                "valueBalloonsEnabled": true
+                            },
+
+                            "periodSelector": {
+                                "position": "top",
+//                "dateFormat": "YYYY-MM-DD JJ:NN",
+//                "inputFieldWidth": 150,
+                                "inputFieldsEnabled": false,
+                                "periodsText": "",
+                                "periods": [ {
+                                    "period": "hh",
+                                    "count": 2,
+                                    "label": "2 hours",
+                                    "selected": true
+                                }, {
+                                    "period": "hh",
+                                    "count": 6,
+                                    "label": "6 hours"
+                                }, {
+                                    "period": "hh",
+                                    "count": 12,
+                                    "label": "12 hours"
+                                }, {
+                                    "period": "dd",
+                                    "count": 1,
+                                    "label": "1 day"
+                                }, {
+                                    "period": "dd",
+                                    "count": 7,
+                                    "label": "7 days"
+                                }, {
+                                    "period": "MAX",
+                                    "label": "MAX"
+                                } ]
+                            },
+
+                            "panelsSettings": {
+                                "usePrefixes": true
+                            },
+
+                            "export": {
+                                "enabled": true,
+                                "position": "bottom-right"
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock js %}

@@ -1,0 +1,42 @@
+api:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
+
+home:
+    resource: "@HomeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+exchange:
+    resource: "@ExchangeBundle/Controller/"
+    type:     annotation
+    prefix:   /exchange
+
+statistic:
+    resource: "@StatisticBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+office:
+    resource: "@OfficeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+wallet:
+    resource: "@WalletBundle/Controller/"
+    type:     annotation
+    prefix:   /wallets
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+support:
+    resource: "@SupportBundle/Controller/"
+    type:     annotation
+    prefix:   /support

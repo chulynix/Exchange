@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="ImageResize" content="no" />
+    <meta http-equiv="ImageToolbar" content="no" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <title>test</title>
+    <link rel="icon" type="image/icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <link href="{{ asset('lib/office/css/style.css') }}?1.0.60" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('lib/office/css/office.css') }}?1.0.60" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/office_custom.css') }}" rel="stylesheet" type="text/css" />
+
+    {% block styles %}
+    {% endblock styles %}
+</head>
+<body>
+
+<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+
+<div class="header">
+    <div class="header-wrap">
+        <div class="header-logo">
+            <a href="{{ path('office_dashboard') }}"></a>
+        </div>
+    </div>
+</div>
+
+<div class="topnav">
+    <table>
+        <tr>
+            <td {% if app.request.attributes.get('_route') == 'office_dashboard' %}class="active"{% endif %}>
+                <a href="{{ path('office_dashboard') }}">{{ 'office.layout.dashboard'|trans }}</a>
+            </td>
+            <td {% if app.request.attributes.get('_route') == 'office_exchange_buy_sell' %}class="active"{% endif %}>
+                <a href="{{ path('office_exchange_buy_sell') }}">{{ 'office.layout.buy_sell'|trans }}</a>
+            </td>
+            <td {% if app.request.attributes.get('_route') == 'office_accounts' %}class="active"{% endif %}>
+                <a href="{{ path('office_accounts') }}">{{ 'office.layout.accounts'|trans }}</a>
+            </td>
+            <td {% if app.request.attributes.get('_route') == 'fos_user_profile_edit' or app.request.attributes.get('_route') == 'fos_user_change_password' %}class="active"{% endif %}>
+                <a href="{{ path('fos_user_profile_edit') }}">{{ 'office.layout.settings'|trans }}</a>
+            </td>
+            <td class="logout">
+                <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="content-wrapper">
+    <div class="content">
+        <div class="leftcol" id="leftCol">
+            <div class="block-personal">
+                    <div class="block-personal-acctype personal">
+                        {#<a>{{ 'office.layout.personal_account'|trans }}</a>#}
+                        <a>&nbsp;</a>
+                    </div>
+                    <div class="block-personal-user">
+                        <b>
+                            <i></i>
+                            <a>{{ app.user.username }}</a>
+                        </b>
+                        {#<span>#}
+                            {#<span>000<i>0</i></span>#}
+						{#</span>#}
+                        {% if app.user.verificationStatus == 0 or app.user.verificationStatus == 3 %}
+                            <div class="block-personal-user-verify">
+                                <a href="{{ path('office_verification') }}" class="cp">{{ 'office.layout.no_verification'|trans }}</a>
+                            </div>
+                        {% elseif app.user.verificationStatus == 1 %}
+                            <div class="block-personal-user-verify-wait">
+                                <a href="{{ path('office_verification') }}" class="cp">{{ 'office.layout.wait_verification'|trans }}</a>
+                            </div>
+                        {% elseif app.user.verificationStatus == 2 %}
+                            <div class="block-personal-user-verify-done">
+                                <a class="cp">{{ 'office.layout.done_verification'|trans }}</a>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div id="walletsBlock" class="block-wallets">
+                        <span id="walletErrorMessage" class="rf-msg dn"></span>
+                        <div class="block-wallets-title">{{ 'office.layout.wallets'|trans }}</div>
+                        <ul class="block-operations" id="walletList">
+                            <ul class="rf-ulst" id="walletDataList">
+                                <li id="walletDataList:0" class="rf-ulst-itm">
+                                    <div class="sum">
+                                        <b>
+                                            <a class="wallet-currency">{{ 'office.layout.dollar'|trans }}</a>
+                                        </b>
+                                        <b>{{ app.user.usdWallet.sum }}</b>
+                                    </div>
+                                    <div class="wallet">
+										<span></span>
+                                        <span>USD</span>
+                                    </div>
+                                </li>
+                                <li id="walletDataList:1" class="rf-ulst-itm">
+                                    <div class="sum">
+                                        <b>
+                                            <a class="wallet-currency">BitCoin</a>
+                                        </b>
+                                        <b>{{ app.user.btcWallet.sum }}</b>
+                                    </div>
+                                    <div class="wallet">
+										<span></span>
+                                        <span>BTC</span>
+                                    </div>
+                                </li>
+                                <li id="walletDataList:2" class="rf-ulst-itm">
+                                    <div class="sum">
+                                        <b>
+                                        </b>
+                                    </div>
+                                    <div class="wallet">
+										<span></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </ul>
+                        <div style="font-size: 16px; margin-top: 20px; margin-left: 13px">
+                            <a href="{{ path('all_tickets') }}">
+                                {#{{ 'office.layout.support'|trans }}#}
+                                <img src="{{ asset('images/support.jpg') }}" width="195" alt=""/>
+                            </a>
+                        </div>
+                        <div style="font-size: 16px; margin-top: 5px; margin-left: 13px">
+                            <a href="{{ path('office_help') }}">
+                                {#{{ 'office.layout.help'|trans }}#}
+                                <img src="{{ asset('images/help.jpg') }}" width="195" alt=""/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="p-main">
+
+            <div class="rightcol" id="rightCol">
+                {% block body %}{% endblock body %}
+            </div>
+
+        </div>
+    </div>
+    <div class="cb"></div>
+</div>
+
+<div class="footer" style="height: 63px; ">
+    <div class="footer-wrap">
+        <div class="footer-copy" style="width: 100%">
+            © <a href="#" style="color: white">test.com</a> is owned by testLLC, located in United States, Montana, Great Falls, 501 Park Drive south, Postal code 59405.
+        </div>
+        {#<div class="footer-copy" style="float: right; width:100px;">#}
+            {#<a href="#" target="_blank">Для разработчиков</a>#}
+        {#</div>#}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('.box-close').click(function() {
+        var box = $(this).parent();
+        box.remove();
+    });
+</script>
+
+{% block js %}
+{% endblock js %}
+</body>
+
+</html>

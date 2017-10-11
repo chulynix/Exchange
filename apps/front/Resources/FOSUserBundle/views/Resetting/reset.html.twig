@@ -1,0 +1,55 @@
+{% extends ":home:base.html.twig" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/home_form_page.css') }}"/>
+{% endblock style %}
+
+{% block body %}
+<div role="main" id="main" class="containerMobileFullWidth">
+
+    <section class="row-fluid organized">
+        <div class="containerCentered">
+            <div class="span12">
+                <h2 class="large">{{ 'home.login.forgot_password'|trans }}</h2>
+
+                <div id="content" class="contentContainer" style="width: 60%; margin-top: 0px">
+                    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                        <div id="passwordSection" class="clearfix">
+                            <div class="textInput">
+                                <div class="fieldWrapper">
+                                    {{ form_label(form.plainPassword.first, null, {'label_attr': {'class': 'fieldLabel'}}) }}
+                                    {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.new_password'|trans({}, 'FOSUserBundle')}}) }}
+                                    {% if form_errors(form.plainPassword.first) %}
+                                        <div class="home-form-error">
+                                            <span>{{ form_errors(form.plainPassword.first) }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="textInput">
+                                <div class="fieldWrapper">
+                                    {{ form_label(form.plainPassword.second, null, {'label_attr': {'class': 'fieldLabel'}}) }}
+                                    {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.new_password_confirmation'|trans({}, 'FOSUserBundle')}}) }}
+                                    {% if form_errors(form.plainPassword.second) %}
+                                        <div class="home-form-error">
+                                            <span>{{ form_errors(form.plainPassword.second) }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                        <div class="actions actionsSpaced">
+                            <button class="button actionContinue" type="submit" id="btnLogin" name="btnLogin" value="Login">
+                                {{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock body %}

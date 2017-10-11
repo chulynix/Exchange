@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-KG" class="no-js" data-device-type="dedicated">
+<head>
+    <meta charset="UTF-8" />
+    {#<link rel="shortcut icon" type="image/x-icon" href="https://www.paypalobjects.com/webstatic/icon/favicon.ico" />#}
+    <link rel="stylesheet" href="{{ asset('css/home_one.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/home_two.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('css/home_three.css') }}" type="text/css" />
+    {#<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" />#}
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body class="">
+
+    <div id="body" class="">
+        <header class="table-row pp-header" role="banner">
+            <div>
+                <div class="containerCentered " style="height: 35px">
+                    <a href="#Menu" id="menu-button" role="button">Menu</a>
+
+
+                    <div id="header-buttons" class="header-buttons">
+                        <a href="{{ path('fos_user_security_login') }}" class="btn btn-small btn-secondary">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        <a href="{{ path('fos_user_registration_register') }}" class="btn btn-small btn-signup">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {% block body %}
+        {% endblock body %}
+
+        {#<footer role="contentinfo" class="global-footer">#}
+            {#<div class="containerCentered containerExtend">#}
+
+                {#<hr>#}
+                {#<ul class="footer-secondary secondaryLink">#}
+                    {#<li><a href="{{ path('home_about') }}">{{ 'home.about.about'|trans }}</a></li>#}
+
+                    {#<li><a href="{{ path('home_privacy') }}">{{ 'home.privacy.privacy'|trans }}</a></li>#}
+
+                    {#<li><a href="{{ path('home_terms_and_conditions') }}">{{ 'home.terms_and_conditions'|trans }}</a></li>#}
+
+                    {#<li><a href="{{ path('home_contacts') }}">{{ 'home.contacts.contacts'|trans }}</a></li>#}
+                {#</ul>#}
+
+
+                {#<ul class="footer-tertiary copyright-section secondaryLink">#}
+                    {#<li id="footer-copyright" class="footer-copyright">&copy; 2017 All rights reserved.</li>#}
+                {#</ul>#}
+            {#</div>#}
+        {#</footer>#}
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-sm-12" style="text-align: justify;">
+                                <div style="width:100% " class="text-center">
+                                    {#<img src="{{ asset('images/logo.png') }}" style="width:300px; height:auto;" alt=""><br>#}
+                                    <img src="{{ asset('images/logo-horizontal.png') }}" style="width:300px; height:auto;" alt=""><br>
+                                </div>
+                                {#Virtual currency is becoming more popular by the minute. It’s starting to seem that everyone wants in, yet it isn’t always so easy to get a hold of. <a href="https://www.coinmama.com/faq">Read more</a>#}
+                            </div>
+                        </div>
+                        <div style="height: 90px">&nbsp;</div>
+                        <img style="border: 0; margin-left: 10%" src="{{ asset('images/comodo.png') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="widget widget_recent_post" style="margin-bottom:0">
+                            <h3>Links</h3>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('fos_user_security_login') }}" class="bitcoins">Log In</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('fos_user_registration_register') }}" class="ethereum">Sign Up</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home_about') }}" class="how-does-it-work">About</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home_contacts') }}" class="faq">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home_terms_and_conditions') }}" class="custom-link">Terms &amp; Conditions</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('home_privacy') }}">Privacy</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('exchange_get_info') }}">Api</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-sm-12 widget">
+                                <h3>BitCoin</h3>
+                                <div class="widget widget-address" style="text-align: justify;">
+                                    Bitcoin uses peer-to-peer technology to operate with no central authority or banks; managing transactions and the issuing of bitcoins is carried out collectively by the network. Bitcoin is open-source; its design is public, nobody owns or controls Bitcoin and everyone can take part. </div>
+                            </div>
+                        </div>
+                        {#<div class="row" style="margin: 8px 0 8px 0">#}
+                            {#<div class="col-sm-2" style="margin-top: 4px; padding:0;">#}
+                                <img style="border: 0; width: 287px; height: 85px" src="{{ asset('images/paypal.png') }}">
+                            {#</div>#}
+                        {#</div>#}
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-sm-12 widget">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                {#<div class="row" style="margin: 8px 0 8px 0">#}
+                    {#<div class="col-sm-2" style="margin-top: 4px; padding:0;">#}
+                        {##}
+                    {#</div>#}
+                {#</div>#}
+                <div style="clear: both"></div>
+                <div style="height: 10px">&nbsp;</div>
+            </div>
+            <div class="subfooter" style="margin: 0 0 -40px 0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            &copy; Copyright 2017. All rights reserved.
+                            {#<small>#}
+                                {#Coinmama is a property of New Bit Ventures Ltd company #514907880. New Bit Ventures Ltd is a regulated entity registered as a Money Service Business # 31000084489239. <a href="https://www.coinmama.com/assets/img/msb_registration.pdf" target="_blank">FinCEN MSB registration</a>#}
+                            {#</small>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

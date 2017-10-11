@@ -1,0 +1,210 @@
+{% extends ":office:base.html.twig" %}
+
+{% form_theme form _self %}
+
+{% block file_widget %}
+    {% spaceless %}
+        {% set type = type|default('file') %}
+        <div class="fileform">
+            <div class="fileformlabel"></div>
+            <div class="selectbutton">{{ 'office.verification.choose_file'|trans }}</div>
+        {#<span class="file-button button black">#}
+            {#<input id="fileToUpload1" size="45" name="fileToUpload1" class="input no-submit" accept="image/jpg,image/jpeg,image/png,image/gif,application/pdf" type="file" style="display: none">#}
+            <input type="{{ type }}" {{ block('widget_attributes') }} class="upload" accept="image/jpg,image/jpeg,image/png,image/gif,application/pdf" onchange="getName(this.value, this.id);" />
+            {#<input value="Upload Document Copy" type="button">#}
+        {#</span>#}
+        </div>
+    {% endspaceless %}
+{% endblock file_widget %}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace %}
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %} style="font-size: 14px; float: left; padding-top: 5px; font-weight: bold">
+            {{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}
+        </label>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <div class="">
+            <div class="p-profile">
+                <span id="deposit-funds-header">
+                    <div class="p-inside-transactions-header">{{ 'office.verification.verification'|trans }}</div>
+                </span>
+
+                <div style="width: 500px; margin: 0 auto; text-align: center">
+                    {% if app.user.verificationStatus == 0 or app.user.verificationStatus == 3 %}
+                        <div>
+                            <h2>Documents submitted for verification are checked within 72 hours.</h2>
+                            <h2>(JPG, JPEG, GIF, PNG, PDF, not more than 9MB)</h2>
+                        </div>
+                        <br><br>
+                        {{ form_start(form, {'attr': {'class': 'verification-form'}}) }}
+                        {{ form_widget(form.passportFile, {'attr': {'class': 'input no-submit'}}) }}
+                        <div class="form-error">
+                            {% if form_errors(form.passportFile) %}{{ form_errors(form.passportFile) }}{% endif %}
+                        </div>
+                        <div class="file-description">
+                            Please upload one of the documents from the list below to have your identity verified:
+                            <br>
+
+                            - Passport<br>
+                            - Driving license, both sides<br>
+                            - National ID card, both sides<br>
+                            <br>
+                            Document requirements:
+                            <br>
+                            - Sharp image in color<br>
+                            - Size over 800 x 600 px<br>
+                            - No hidden details<br>
+                        </div>
+                        <br><br><br><br><br>
+                        {{ form_widget(form.servicesFile, {'attr': {'placeholder': '0.00'}}) }}
+                        <div class="form-error">
+                            {% if form_errors(form.servicesFile) %}{{ form_errors(form.servicesFile) }}{% endif %}
+                        </div>
+                        <div class="file-description">
+                            Please upload one of the documents from the list below to have your address verified:
+                            <br>
+                            - Utility bill (electricity, gas, water)<br>
+                            - Telecom bill (internet, cable, mobile phone, landline)<br>
+                            - Bank/credit card statement<br>
+                            - Confirmation letter from the bank saying you have an account with that bank<br>
+                            - Your registered address in passport/ID<br>
+                            <br>
+                            Document requirements:
+                            <br>
+                            - The document needs to contain your name<br>
+                            - The document needs to contain your address<br>
+                            - The document cannot be older than 3 months, with the exception of passport/ID<br> registration or address in car license<br>
+                        </div>
+                        <br><br><br><br><br>
+                        {{ form_widget(form.documentFile, {'attr': {'placeholder': '0.00'}}) }}
+                        <div class="form-error">
+                            {% if form_errors(form.documentFile) %}{{ form_errors(form.documentFile) }}{% endif %}
+                        </div>
+                        <div class="file-description">
+                            Please upload a photo of yourself holding a Passport in your hand.
+                            <br><br>
+                            Document requirements:
+                            <br>
+                            - Ensure that your face can be seen clearly.<br>
+                            - Ensure that the details of your Passport are clearly visible in the photo.<br>
+                            - The photo should not be a mirror image.<br>
+                            - The photo must not be altered or edited in any way.<br>
+                            - Size over 800 x 600 px<br>
+                        </div>
+                        <br><br><br><br><br>
+                        {{ form_label(form.skype) }}<br><br>
+                        {{ form_widget(form.skype, {'attr': {'style': 'margin-left: -185px; height: 25px; font-size: 20px;'}}) }}
+                        <div class="form-error">
+                            {% if form_errors(form.skype) %}{{ form_errors(form.skype) }}{% endif %}
+                        </div>
+                        <div class="file-description">
+                            Please enter your skype account.
+                            <br>
+                            - In order to verify your account we will call you by skype.<br>
+                            - You need to turn on your camera and hold passport near your face.<br>
+                            - Also you will be asked by operator a few questions.<br>
+                        </div>
+
+                        {{ form_rest(form) }}
+                        <br><br>
+                        <ul class="p-inside-transactions-buttons" style="padding-right: 57px">
+                            <li class="next button green">
+                                <input value="{{ 'office.accounts.send'|trans }}" type="submit" style="width: 100px">
+                            </li>
+                        </ul>
+                        {{ form_end(form) }}
+                    {% elseif app.user.verificationStatus == 1 %}
+                        <h2>{{ 'office.verification.verificated_waiting'|trans }}</h2>
+                        <form>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.passport_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.passport) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.services_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.services) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.document_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.document) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.skype'|trans }}</legend>
+                                <input type="text" value="{{ app.user.verification.skype }}" readonly="readonly" disabled="disabled">
+                            </fieldset>
+                        </form>
+                    {% elseif app.user.verificationStatus == 2 %}
+                        <h2>{{ 'office.verification.verification_done'|trans }}</h2>
+                        <form>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.passport_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.passport) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.services_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.services) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.document_photo'|trans }}</legend>
+                                <img src="{{ asset('uploads/verification/' ~ app.user.verification.document) }}" width="200px">
+                            </fieldset>
+                            <fieldset style="border: 1px solid green; padding: 5px">
+                                <legend>{{ 'office.verification.skype'|trans }}</legend>
+                                <input type="text" value="{{ app.user.verification.skype }}" readonly="readonly" disabled="disabled">
+                            </fieldset>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{% block js %}
+    <script type="text/javascript">
+        function getName (str, elem){
+            if (str.lastIndexOf('\\')){
+                var i = str.lastIndexOf('\\')+1;
+            }
+            else{
+                var i = str.lastIndexOf('/')+1;
+            }
+            var filename = str.slice(i);
+//            var parent = $(this).parent(".fileform");
+//            var parent = elem.attr('class');
+//            console.log(elem);
+            var input = $('[id = ' + elem + ']');
+            var parent = input.parent(".fileform");
+//            console.log(parent.attr('class'));
+            var uploaded = parent.find(".fileformlabel");
+            uploaded.html(filename);
+        }
+    </script>
+{% endblock js %}

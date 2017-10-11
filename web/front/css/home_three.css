@@ -1,0 +1,443 @@
+/* /home/head.css */
+.row-fluid .content-block {
+    min-height: 540px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.table-row.hero > #hero {
+    text-align: center;
+    vertical-align: middle;
+}
+.novideo-bg {
+    display: none;
+    background-position: center top;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    height: 400%\9;
+    z-index: -1;
+    opacity: 0.9;
+}
+.no-backgroundsize .novideo-bg {
+    top: -280px\9;
+}
+.novideo-bg.show {
+    display: block;
+}
+.hero-video-still .novideo-bg {
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/videos/home-signup.jpg");
+}
+html[data-device-type="mobile"] .novideo-bg {
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/home/city_bg_mobile.jpg");
+}
+#hero.video-loaded > .novideo-bg {
+    display: none;
+}
+h1 {
+    margin-bottom: 20px;
+    text-shadow: 0 0 160px #000;
+}
+html[data-device-type="mobile"] h1 {
+    font-size: 40px;
+    font-size: 2.857rem;
+    line-height: 1.25em;
+    padding: 4% 8% 0;
+    text-shadow: none;
+}
+.hero .row-fluid {
+    background: transparent;
+}
+html[data-device-type="portable"] .hero .btn {
+    width: 32%;
+}
+html[data-device-type="mobile"] .hero .btn {
+    display: block;
+    margin: 0 auto;
+    -webkit-touch-callout: none;
+}
+#hero-arrow {
+    display: none;
+}
+.hero .input-wrapper {
+    margin-top: 26px;
+}
+.hero .input-wrapper:first-child input {
+    margin-left: 0;
+}
+.hero input[type="email"] {
+    width: 250px;
+}
+.hero input[type="password"] {
+    width: 165px;
+}
+.hero input.btn {
+    min-width: 250px;
+}
+.hero .btn {
+    width: 321px;
+}
+html[data-device-type="mobile"] .hero .btn {
+    width: 89%;
+}
+.hero .signup-subline {
+    margin-top: 26px;
+    font-size: 15px;
+    font-size: 1.07142857142857rem;
+}
+.dark .signup-subline {
+    color: #fff;
+}
+.button-menu .icon {
+    background-color: transparent;
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/icons/quickbar-icons2x.png");
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/icons/quickbar-icons.png")\9;
+    background-repeat: no-repeat;
+    background-position: -25px 5px;
+    background-size: 72px 32px;
+    margin: 0 4px 0 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #8c8c8c;
+    border-radius: 14px;
+    overflow: hidden;
+    text-indent: -999em;
+    min-width: 0;
+    padding: 0;
+
+    moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+}
+.button-menu .icon:hover {
+    border-color: #0079c1;
+}
+.button-menu .icon.help {
+    width: 23px;
+}
+.button-menu .icon.help:hover {
+    background-position: -25px -15px;
+}
+.button-menu .icon.contact {
+    background-position: -55px 5px;
+}
+.button-menu .icon.contact:hover {
+    background-position: -55px -15px;
+}
+.button-menu .icon.search {
+    background-position: 5px 5px;
+}
+.button-menu .icon.search:hover {
+    background-position: 5px -15px;
+}
+#n1 {
+    box-shadow: 0 -1px rgba(0, 0, 0, .1);
+}
+.n1 {
+    /*background-image: url("https://www.paypalobjects.com/webstatic/en_LITE/mktg/wright/home/home_n1_1x.jpg");*/
+    background-image: url("../images/buy_sell.jpg");
+}
+.n3 {
+    /*background-image: url("https://www.paypalobjects.com/webstatic/en_LITE/mktg/wright/home/home_n3_1x.jpg");*/
+    background-image: url("../images/safe.jpg");
+}
+.n2, .n2.parallax .parallax-bg {
+    /*background-image: url("https://www.paypalobjects.com/webstatic/en_LITE/mktg/wright/home/home_n2_lvc_1x.jpg");*/
+    background-image: url("../images/red_wood.jpg");
+}
+.n4, .n4.parallax .parallax-bg {
+    background-image: url("https://www.paypalobjects.com/webstatic/en_LITE/mktg/wright/home/home_n4_1x.jpg");
+}
+/*tickle bar */
+.hero-notification p {
+    padding: 30px 0;
+    font-size: 15px;
+    font-size: 1.07142857142857rem;
+}
+.hero-notification p:last-child {
+    padding: 0;
+}
+.signature {
+    background: url("https://www.paypalobjects.com/webstatic/mktg/Logo/pplogo_reverse_1x.png") no-repeat center;
+    height: 40px;
+    text-indent: -999em;
+}
+#fixed-top > .table-row.hero > div {
+    text-align: center;
+    vertical-align: middle;
+    height: 734px;
+}
+/* Mobile version */
+html[data-device-type="mobile"] h1 {
+    margin-top: 0;
+}
+html[data-device-type="mobile"] .signup-subline {
+    margin-top: 0;
+}
+html[data-device-type="mobile"] .row-fluid .content-block {
+    min-height: 0;
+}
+html[data-device-type="mobile"] #hero .fancy-down-arrow-grey {
+    display: block;
+}
+
+.table-row.hero > #hero {
+    text-align: center;
+    vertical-align: middle;
+}
+html[data-device-type="mobile"] #fixed-top > .hugger-row,
+html[data-device-type="mobile"] .hero-hugger,
+html[data-device-type="mobile"] .hero-hugger-spacer {
+    display: none;
+}
+.hero-hugger {
+    text-align: center;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 3;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate(0, 0);
+}
+.hero-hugger .containerCentered {
+    padding-top: 16px;
+    line-height: 0.5em;
+}
+.hero-hugger .button-menu {
+    padding: 0;
+    margin: 0;
+    width: 180px;
+    white-space: nowrap;
+    text-align: left;
+}
+.hero-hugger .button-menu li {
+    list-style-type: none;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 14px;
+}
+.hero-hugger .button-menu .navlink {
+    display: inline-block;
+    font-size: 13px;
+    color: #777;
+    padding-left: 8px;
+    border-left: 1px solid #ddd;
+    position: relative;
+    top: -2px;
+}
+.hero-hugger .country-selector {
+    margin-top: 0;
+}
+.hero-hugger .country-selector a {
+    color: #777;
+}
+html[data-device-type="mobile"] #hero .fancy-down-arrow-grey {
+    display: block;
+}
+#hugger-arrow {
+    top: -10px;
+}
+.button-menu .icon {
+    background-color: transparent;
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/icons/quickbar-icons2x.png");
+    background-image: url("https://www.paypalobjects.com/webstatic/mktg/wright/icons/quickbar-icons.png")\9;
+    background-repeat: no-repeat;
+    background-position: -25px 5px;
+    background-size: 72px 32px;
+    margin: 0 4px 0 0;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #8c8c8c;
+    border-radius: 14px;
+    overflow: hidden;
+    text-indent: -999em;
+    min-width: 0;
+    padding: 0;
+    moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+}
+.button-menu .icon:hover,
+.button-menu .icon:focus {
+    border-color: #0079c1;
+}
+.button-menu .icon:focus {
+    outline: 0;
+    box-shadow: 0 0 0 1px #0079c1;
+}
+.button-menu .icon.help {
+    width: 23px;
+}
+.button-menu .icon.help:hover,
+.button-menu .icon.help:focus {
+    background-position: -25px -15px;
+}
+.button-menu .icon.contact {
+    background-position: -55px 5px;
+}
+.button-menu .icon.contact:hover,
+.button-menu .icon.contact:focus {
+    background-position: -55px -15px;
+}
+.button-menu .icon.search {
+    background-position: 5px 5px;
+}
+.button-menu .icon.search:hover,
+.button-menu .icon.search:focus {
+    background-position: 5px -15px;
+}
+#n1 {
+    box-shadow: 0 -1px rgba(0, 0, 0, .1);
+}
+
+
+
+/*Custom*/
+
+footer {
+    background: #171a21 none repeat scroll 0 0;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.container-fluid::after, .container-fluid::before, .container::after, .container::before {
+    content: " ";
+    display: table;
+}
+
+.container-fluid::after, .container::after {
+    clear: both;
+}
+.container-fluid::after, .container-fluid::before, .container::after, .container::before {
+    content: " ";
+    display: table;
+}
+.container {
+    /*width: 1170px;*/
+    width: 93%;
+    /*padding: 0px 20px;*/
+    /*margin-left: ;*/
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2%;
+    /*padding-right: 15px;*/
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.col-md-3 {
+    margin-right: -1px;
+}
+.col-md-3 {
+    width: 22%;
+}
+.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+    float: left;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.col-md-3 {
+    margin-right: -1px;
+}
+
+.col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+    float: left;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+footer h3 {
+    color: #fff;
+    font-family: "Roboto",Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+h3 {
+    font-weight: 200;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+}
+
+.widget h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+
+footer .widget ul {
+    margin: 0;
+    padding: 0;
+}
+.widget ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+footer .widget_recent_post li {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-bottom-color: #34373d;
+    padding: 0 0 5px;
+}
+.widget_recent_post li {
+    background: rgba(0, 0, 0, 0) url("../img/list-arrow.png") no-repeat scroll left 2px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 5px;
+    padding-bottom: 7px;
+    padding-left: 20px;
+}
+
+.col-sm-2 {
+    width: 16.6667%;
+}
+.col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9 {
+    float: left;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+#comodoTL {
+    display: block;
+    font-size: 8px;
+    padding-left: 18px;
+}
+footer a, footer a:hover {
+    color: #ccc;
+}
+
+.subfooter {
+    background: #171a21 none repeat scroll 0 0;
+    border-top: 1px solid #26282f;
+    font-size: 12px;
+    margin: 40px 0 -40px;
+    padding: 20px 0;
+}

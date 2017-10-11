@@ -1,0 +1,104 @@
+{% extends ':home:base.html.twig' %}
+
+{% block body %}
+    <div id="fixed-top" class="moving-background-container container-fixed">
+
+        <!-- shared -->
+        <div class="table-row hero dark">
+
+            <div id="hero" class="hero-bg content-block moving-background filler hero2-video-still">
+                <h1>US-based cryptocurrency exchange.</h1>
+                <p>We are offering maximum security and trust.</p><br>
+                <div class="novideo-bg"></div>
+            </div>
+        </div>
+
+        <div class="table-row hugger-row">
+            <div class="hero-hugger">
+
+            </div>
+        </div>
+    </div>
+
+    <div role="main" id="main" class="containerMobileFullWidth">
+        <section class="row row-fluid editorial editorial-left " id="n1">
+            <div class="container containerCentered">
+                <div class="col-sm-6 span6 col-sm-offset6 editorial-container editorial-text">
+                    <div class="editorial-cell">
+
+                        <h2 class="h3 large">Fast and simple.</h2>
+
+
+                    </div>
+                </div>
+
+                <div class="editorial-img col-sm-6 span6 editorial-container n1" alt="">
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="row row-fluid editorial editorial-right editorial-bg n2 lightContent ">
+            <div class="parallax-bg scroll-animate" data-translate-y-start="-20" data-translate-y-end="60"></div>
+            <div class="container containerCentered">
+                <div class="col-sm-6 span6 editorial-container editorial-text">
+                    <div class="editorial-cell">
+
+                        <h2 class="h3 large">We make it easy.</h2>
+
+                        <p class="contentPara">The easiest and fastest way to buy Bitcoins and
+                            </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="row-fluid row pullout center-text blue reverseLink" >
+            <div class="containerCentered container">
+                <div class="center-block span8 col-sm-8">
+                    <h2 class="pulloutHeadline ">Superior client services.</h2>
+
+                    <p class="pulloutPara">Client service specialists are available around-the-clock to assist you with any inquiries and answer questions about our unique offerings. You’ll never receive an automated response or speak with an outsourced call center.</p>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="row row-fluid editorial editorial-left ">
+            <div class="container containerCentered">
+                <div class="col-sm-6 span6 col-sm-offset6 editorial-container editorial-text">
+                    <div class="editorial-cell">
+
+                        <h2 class="h3 large">Security</h2>
+
+                        <p class="contentPara">takes a comprehensive approach to security. Our security experts have built in a number of sophisticated measures to prevent the theft of money or information. Two-factor authentication available for your protection. Entire exchange continually audited and inspected for unusual activity.</p>
+
+                    </div>
+                </div>
+
+                <div class="editorial-img col-sm-6 span6 editorial-container n3" alt="">
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="closing-section row-fluid panel center-text light" >
+            <div class="containerCentered">
+                <div class="span12">
+                    <p class="closingHeadline headline large">You've found a good place</p>
+
+                    <a class="btn closing-cta center-block "  href="{{ path('fos_user_registration_register') }}"    >Sign Up for Free</a>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+{% endblock body %}

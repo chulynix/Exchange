@@ -1,0 +1,198 @@
+{% extends ":office:base.html.twig" %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <span id="deposit-funds-header">
+            <div class="p-inside-transactions-header">{{ 'office.accounts.withdraw'|trans }} USD</div>
+        </span>
+
+        <span id="newTxAndNews">
+            <div class="p-main-topbuttons">
+                <div class="p-main-topbuttons-tabs" style="width: 100%">
+                    <ul>
+                        <li id="paypal" class="tabs" style="width: 50%">
+                            <span>
+                                <a href="{{ path('office_withdraw_usd_paypal') }}">{{ 'office.accounts.paypal'|trans }}</a>
+                            </span>
+                        </li>
+                        <li id="wire" class="active tabs" style="width: 50%">
+                            <span>
+                                <a href="javascript: void(0)">{{ 'office.accounts.wire'|trans }}</a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cb"></div><br>
+            </div>
+        </span>
+
+        <div class="">
+            <div class="p-profile">
+                <div style="width: 350px; margin: 0 auto">
+                    {{ form_start(form) }}
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.sum) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.sum, {'attr': {'placeholder': '0.00'}}) }}
+                                <span id="srcCurrency">USD</span>
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.sum) %}{{ form_errors(form.sum) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankName) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankName, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankName) %}{{ form_errors(form.usdWithdraw.bankName) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankSwiftCode) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankSwiftCode, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankSwiftCode) %}{{ form_errors(form.usdWithdraw.bankSwiftCode) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankStreet) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankStreet, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankStreet) %}{{ form_errors(form.usdWithdraw.bankStreet) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankCity) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankCity, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankCity) %}{{ form_errors(form.usdWithdraw.bankCity) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankCountry) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankCountry, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankCountry) %}{{ form_errors(form.usdWithdraw.bankCountry) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankProvinceState) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankProvinceState, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankProvinceState) %}{{ form_errors(form.usdWithdraw.bankProvinceState) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankZipPostalCode) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankZipPostalCode, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankZipPostalCode) %}{{ form_errors(form.usdWithdraw.bankZipPostalCode) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankAccountNumber) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankAccountNumber, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankAccountNumber) %}{{ form_errors(form.usdWithdraw.bankAccountNumber) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.currency) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.currency, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.currency) %}{{ form_errors(form.usdWithdraw.currency) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.iban) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.iban, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.iban) %}{{ form_errors(form.usdWithdraw.iban) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.usdWithdraw.bankAbaRoutingCode) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.usdWithdraw.bankAbaRoutingCode, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.usdWithdraw.bankAbaRoutingCode) %}{{ form_errors(form.usdWithdraw.bankAbaRoutingCode) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    {{ form_rest(form) }}
+                    <br>
+                    <ul class="p-inside-transactions-buttons" style="padding-right: 95px">
+                        <li class="next button green">
+                            <input value="{{ 'office.accounts.send'|trans }}" type="submit" style="width: 100px">
+                        </li>
+                    </ul>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

@@ -1,0 +1,14 @@
+services:
+    app.buy_rate_extension:
+        class: OfficeBundle\Twig\BuyRateExtension
+        public: false
+        arguments: [@doctrine.orm.default_entity_manager]
+        tags:
+            - { name: twig.extension }
+
+    app.sell_rate_extension:
+        class: OfficeBundle\Twig\SellRateExtension
+        public: false
+        arguments: [@doctrine.orm.default_entity_manager]
+        tags:
+            - { name: twig.extension }

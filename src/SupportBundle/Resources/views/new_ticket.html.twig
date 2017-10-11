@@ -1,0 +1,75 @@
+{% extends ":office:base.html.twig"  %}
+
+{#{% form_theme form ':office:twig_theme.html.twig' %}#}
+
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+    {% endfor %}
+
+    <div class="p-profile">
+        <div class="p-inside-transactions-header">{{ 'office.layout.support'|trans }}</div>
+
+        <div class="p-support-start">
+            <span id="newTxAndNews">
+                <div class="p-main-topbuttons">
+                    <div class="p-main-topbuttons-tabs" style="width: 100%">
+                        <ul>
+                            <li id="buy" class="tabs" style="width: 50%">
+                                <span>
+                                    <a href="{{ path('all_tickets') }}">{{ 'office.support.all_tikets'|trans }}</a>
+                                </span>
+                            </li>
+                            <li id="sell" class="active tabs" style="width: 50%">
+                                <span>
+                                    <a href="javascript: void(0)">{{ 'office.support.new_tiket'|trans }}</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cb"></div><br>
+                </div>
+            </span>
+
+            <div style="width: 523px; margin: 0 auto">
+                {{ form_start(form, {'attr':{'class': 'form-horizontal form-label-left'}}) }}
+                <div class="p-profile">
+                    <div class="p-new">
+                        <dl>
+                            <dt>
+                                {{ form_label(form.subject, 'support.subject'|trans) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(form.subject, {'attr': {'style': 'width: 450px'}}) }}
+                                <div class="form-error">
+                                    {% if form_errors(form.subject) %}{{ form_errors(form.subject) }}{% endif %}
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>
+                                {{ form_label(form.text, 'support.text'|trans) }}
+                            </dt>
+                            <dd>
+                                {{ form_widget(form.text, {'attr': {'rows': '6', 'style': 'width: 450px'}}) }}
+                                <div class="form-error">
+                                    {% if form_errors(form.text) %}{{ form_errors(form.text) }}{% endif %}
+                                </div>
+                            </dd>
+                        </dl>
+                        {{ form_rest(form) }}
+                        <ul class="p-inside-transactions-buttons" style="padding-right: 35px">
+                            <li class="next button green">
+                                <input value="{{ 'office.support.send'|trans }}" type="submit" style="width: 100px">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

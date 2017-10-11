@@ -1,0 +1,95 @@
+{% extends ":office:base.html.twig" %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <div class="p-main-transactions tab" style="display: block">
+            <span id="tx-container">
+                <table id="txListDataTable">
+                    <tbody>
+                        <tr>
+                            <th class="type">{{ 'office.accounts.currency'|trans }}</th>
+                            <th class="type">{{ 'office.accounts.balance'|trans }}</th>
+                            <th class="action">{{ 'office.accounts.action'|trans }}</th>
+                        </tr>
+                        <tr>
+                            <td class="type">
+                                <div style="color: #00539E">
+                                    {{ 'office.layout.dollar'|trans }}
+                                </div>
+                            </td>
+                            <td class="type">
+                                <b class="green">{{ app.user.usdWallet.sum }}
+                                </b>USD
+                            </td>
+                            <td class="action">
+                                <ul class="p-inside-transactions-buttons" style="">
+                                    <li class="next button green" style="float: left">
+                                        <a href="{{ path('office_deposit_paypal') }}" style="width: 80px">
+                                            {{ 'office.accounts.deposit'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="next button black">
+                                        <a href="{{ path('office_withdraw_usd_paypal') }}" style="width: 80px">
+                                            {{ 'office.accounts.withdraw'|trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="type">
+                                <div style="color: #00539E">
+                                    {{ 'office.layout.bitcoin'|trans }}
+                                </div>
+                            </td>
+                            <td class="type">
+                                <b class="green">{{ app.user.btcWallet.sum }}
+                                </b>BTC
+                            </td>
+                            <td class="action">
+                                <ul class="p-inside-transactions-buttons" style="">
+                                    <li class="next button green" style="float: left">
+                                        <a href="{{ path('office_deposit_bitcoin') }}" style="width: 80px">
+                                            {{ 'office.accounts.deposit'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="next button black">
+                                        <a href="{{ path('office_withdraw_btc') }}" style="width: 80px">
+                                            {{ 'office.accounts.withdraw'|trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="type">
+                                <div style="color: #00539E">
+                                </div>
+                            </td>
+                            <td class="type">
+                            </td>
+                            <td class="action">
+                                <ul class="p-inside-transactions-buttons" style="">
+                                    <li class="next button green" style="float: left">
+                                            {{ 'office.accounts.deposit'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="next button black">
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </span>
+        </div>
+    </div>
+
+{% endblock body %}

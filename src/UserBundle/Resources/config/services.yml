@@ -1,0 +1,31 @@
+services:
+    user.registration_completed:
+        class: UserBundle\EventListener\RegistrationSuccessListener
+        arguments: [@doctrine.orm.default_entity_manager, @session]
+        tags:
+            - { name: kernel.event_subscriber }
+    user.twofactor.email.provider:
+        class: UserBundle\Security\TwoFactor\Email\Helper
+        arguments: ['@doctrine.orm.default_entity_manager', '@mailer']
+
+    user.twofactor.email.interactive_login_listener:
+        class: UserBundle\EventListener\InteractiveLoginListener
+        arguments: ['@user.twofactor.email.provider']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    user.twofactor.email.request_listener:
+        class: UserBundle\EventListener\RequestListener
+        arguments: ['@user.twofactor.email.provider', '@security.token_storage', '@templating', '@router']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.form.registration:
+        class: UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+
+    user.form.profile:
+        class: UserBundle\Form\ProfileFormType
+        tags:
+            - { name: form.type, alias: user_profile }

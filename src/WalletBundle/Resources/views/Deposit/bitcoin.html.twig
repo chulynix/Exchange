@@ -1,0 +1,44 @@
+{% extends ":office:base.html.twig" %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <span id="deposit-funds-header">
+                        <div class="p-inside-transactions-header">{{ 'office.accounts.deposit'|trans }}</div>
+                    </span>
+                    <div class="panel-body">
+                        <br>
+                        <div style="text-align: center">
+                            <img src="{{ asset('images/bitcoin.png') }}" style="box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+                        </div>
+                        <div id="address">
+                            <div style="text-align: center; margin-top: 15px">
+                                Send BTC to address:
+                            </div>
+                            <div style="text-align: center">
+                                <b>{{ address }}</b>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group" style="text-align: center">
+                                <li  class="next button green" style="margin-right: 45%">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+
+{

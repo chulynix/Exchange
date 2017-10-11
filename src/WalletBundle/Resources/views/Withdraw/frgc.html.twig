@@ -1,0 +1,57 @@
+{% extends ":office:base.html.twig" %}
+
+{% block body %}
+    <div id="p-main" class="p-main">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {% include ':office:alert_success.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {% include ':office:alert_error.html.twig' with {'message' : flashMessage} %}
+        {% endfor %}
+
+        <div class="">
+            <div class="p-profile">
+                <span id="deposit-funds-header">
+                    <div class="p-inside-transactions-header">{{ 'office.accounts.withdraw'|trans }}</div>
+                </span>
+
+                <div style="width: 350px; margin: 0 auto">
+                    {{ form_start(form) }}
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.sum) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.sum, {'attr': {'placeholder': '0.00'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.sum) %}{{ form_errors(form.sum) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="f-item">
+                        <dt>{{ form_label(form.account) }}</dt>
+                        <dd>
+                            <div class="input-currency">
+                                {{ form_widget(form.account, {'attr': {'style': 'width: 243px'}}) }}
+
+                            </div>
+                            <div class="form-error">
+                                {% if form_errors(form.account) %}{{ form_errors(form.account) }}{% endif %}
+                            </div>
+                        </dd>
+                    </dl>
+                    {{ form_rest(form) }}
+                    <br>
+                    <ul class="p-inside-transactions-buttons" style="padding-right: 95px">
+                        <li class="next button green">
+                            <input value="{{ 'office.accounts.send'|trans }}" type="submit" style="width: 100px">
+                        </li>
+                    </ul>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock body %}

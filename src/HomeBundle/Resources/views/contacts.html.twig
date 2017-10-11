@@ -1,0 +1,95 @@
+{% extends ":home:base.html.twig" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ asset('css/home_form_page.css') }}"/>
+{% endblock style %}
+
+{% block body %}
+    <div role="main" id="main" class="containerMobileFullWidth">
+
+        <section class="row-fluid organized">
+            <div class="containerCentered">
+                <div class="span12">
+                    <h2 class="large">{{ 'home.contacts.contacts'|trans }}</h2>
+
+                    <div id="content" class="contentContainer" style="width: 60%; margin-top: 0px">
+                        {#<header><p class="paypal-logo paypal-logo-long">PayPal</p></header>#}
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div id="notifications" class="notifications" tabindex="-1" style="margin-left: 4%">
+                                <p class="notification notification-success" role="alert">{{ flashMessage }}</p>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div id="notifications" class="notifications" tabindex="-1" style="margin-left: 4%">
+                                <p class="notification notification-critical" role="alert">{{ flashMessage }}</p>
+                            </div>
+                        {% endfor %}
+                        {{ form_start(form) }}
+                        <div id="passwordSection" class="clearfix">
+                            <div class="textInput">
+                                <div class="fieldWrapper">
+                                    {{ form_label(form.name, null, {'label_attr': {'class': 'fieldLabel'}}) }}
+                                    {{ form_widget(form.name, {'attr': {'placeholder': 'home.contacts.name'|trans}}) }}
+                                    {% if form_errors(form.name) %}
+                                        <div class="home-form-error">
+                                            <span>{{ form_errors(form.name) }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="textInput">
+                                <div class="fieldWrapper">
+                                    {{ form_label(form.email, null, {'label_attr': {'class': 'fieldLabel'}}) }}
+                                    {{ form_widget(form.email, {'attr': {'placeholder': 'Email'|trans}}) }}
+                                    {% if form_errors(form.email) %}
+                                        <div class="home-form-error">
+                                            <span>{{ form_errors(form.email) }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="textInput">
+                                <div class="fieldWrapper">
+                                    {{ form_label(form.message, null, {'label_attr': {'class': 'fieldLabel'}}) }}
+                                    {{ form_widget(form.message, {'attr': {'rows': '5', 'placeholder': 'home.contacts.message'|trans}}) }}
+                                    {% if form_errors(form.message) %}
+                                        <div class="home-form-error">
+                                            <span>{{ form_errors(form.message) }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% if captcha %}
+                                <div class="textInput" style="text-align: center">
+                                    <div class="fieldWrapper"  style="width: 285px; margin: 0 auto">
+                                        <script type="text/javascript">
+                                            var onloadCallback = function() {
+                                                grecaptcha.render('captcha', {
+                                                    'sitekey' : '{{ site_key }}',
+                                                    'hl' : 'en',
+                                                    'theme' : 'light'
+                                                });
+                                            };
+                                        </script>
+                                        <div id="captcha"></div>
+                                        <script src="https://www.google.com/recaptcha/api.js?hl=en&onload=onloadCallback&render=explicit"
+                                                async defer>
+                                        </script>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {{ form_rest(form) }}
+                        <div class="actions actionsSpaced">
+                            <button class="button actionContinue" type="submit" id="btnLogin" name="btnLogin" value="Login">
+                                {{ 'home.contacts.send'|trans }}
+                            </button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock body %}
